@@ -1,47 +1,52 @@
 /**
  * Description:
  * This class checks whether a string is a palindrome
- * using a Stack data structure.
+ * using both Queue (FIFO) and Stack (LIFO).
  *
- * UC5: Stack-Based Palindrome Checker
+ * UC6: Queue + Stack Based Palindrome Check
  *
  * @author Developer
- * @version 5.0
+ * @version 6.0
  */
 
+import java.util.Queue;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC5.
+     * Application entry point for UC6.
      *
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
 
-        // Declare and initialize the input string
-        String input = "noon";
+        // Define the input string to validate
+        String input = "civic";
 
-        // Create a Stack to store characters
+        // Create a Queue to store characters in FIFO order
+        Queue<Character> queue = new LinkedList<>();
+
+        // Create a Stack to store characters in LIFO order
         Stack<Character> stack = new Stack<>();
 
-        // Push each character of the string into the stack
+        // Insert each character into both queue and stack
         for (char c : input.toCharArray()) {
-            stack.push(c);
+            queue.add(c);   // Enqueue
+            stack.push(c);  // Push
         }
 
-        // Assume palindrome initially
+        // Flag to track palindrome status
         boolean isPalindrome = true;
 
-        // Iterate again through original string
-        for (char c : input.toCharArray()) {
+        // Compare characters until queue becomes empty
+        while (!queue.isEmpty()) {
 
-            // Pop from stack (reversed order)
-            char poppedChar = stack.pop();
+            char fromQueue = queue.remove(); // Dequeue
+            char fromStack = stack.pop();    // Pop
 
-            // Compare original character with popped character
-            if (c != poppedChar) {
+            if (fromQueue != fromStack) {
                 isPalindrome = false;
                 break;
             }
