@@ -1,40 +1,54 @@
 /**
  * Description:
  * This class checks whether a string is a palindrome
- * by reversing it using a loop.
+ * using a Stack data structure.
  *
- * UC3: Palindrome Check Using String Reverse
+ * UC5: Stack-Based Palindrome Checker
  *
  * @author Developer
- * @version 3.0
+ * @version 5.0
  */
+
+import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC3.
+     * Application entry point for UC5.
      *
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
 
-        // Hardcoded input string
-        String input = "madam";
+        // Declare and initialize the input string
+        String input = "noon";
 
-        // Variable to store reversed string
-        String reversed = "";
+        // Create a Stack to store characters
+        Stack<Character> stack = new Stack<>();
 
-        // Iterate from last character to first
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
+        // Push each character of the string into the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
 
-        // Compare original and reversed string
-        boolean isPalindrome = input.equals(reversed);
+        // Assume palindrome initially
+        boolean isPalindrome = true;
+
+        // Iterate again through original string
+        for (char c : input.toCharArray()) {
+
+            // Pop from stack (reversed order)
+            char poppedChar = stack.pop();
+
+            // Compare original character with popped character
+            if (c != poppedChar) {
+                isPalindrome = false;
+                break;
+            }
+        }
 
         // Display result
-        System.out.println("Input text: " + input);
-        System.out.println("Reversed text: " + reversed);
-        System.out.println("Is it a Palindrome? : " + isPalindrome);
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
