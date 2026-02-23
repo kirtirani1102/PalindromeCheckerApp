@@ -1,6 +1,6 @@
 # 🔤 Palindrome Checker Management System
 
-> A Java console application that serves as the entry point for a Palindrome Checker system.
+> A console-based Java application that validates whether a given string is a palindrome under different conditions, while strengthening core programming fundamentals and data structure concepts.
 
 ---
 
@@ -101,14 +101,109 @@ java UseCase1PalindromeCheckerApp
 PalindromeCheckerApp/
 │
 ├── UseCase1PalindromeCheckerApp.java
+├── UseCase2PalindromeCheckerApp.java
 └── README.md
+```
+
+---
+
+---
+
+## 🚀 Use Case 2: Print a Hardcoded Palindrome Result
+
+### 🎯 Goal
+
+Display whether a hardcoded string is a palindrome.
+
+### 👤 Actor
+
+User
+
+---
+
+### 🔄 Application Flow
+
+1. Program starts.
+2. Hardcoded string is checked.
+3. Result is printed to the console.
+4. Program exits.
+
+---
+
+### 🧠 Key Concepts Used
+
+#### 1️⃣ Class
+In Java, even the simplest program must be written inside a class, as a class acts as a container to hold program logic.
+
+```java
+public class UseCase2PalindromeCheckerApp
+```
+
+#### 2️⃣ Main Method (Entry Point)
+
+```java
+public static void main(String[] args)
+```
+
+#### 3️⃣ Static Keyword
+Allows the JVM to invoke the `main()` method without creating an object of the class.
+
+#### 4️⃣ String
+A built-in Java class used to store and manipulate textual data. Here, it stores the word to be checked for a palindrome.
+
+#### 5️⃣ String Literal
+Text enclosed within double quotes (`"madam"`), stored in the String constant pool.
+
+#### 6️⃣ Conditional Statement (if-else)
+Used to evaluate whether the given string satisfies the palindrome condition.
+
+#### 7️⃣ Console Output
+`System.out.println()` is used to display the result on the console.
+
+#### 8️⃣ Data Structure: String
+
+---
+
+### 💡 Hint
+
+Loop only till half the string length and compare characters from both ends:
+
+```java
+for (int i = 0; i < input.length() / 2; i++) {
+    // compare input.charAt(i) with input.charAt(input.length() - 1 - i)
+}
+```
+
+---
+
+### 🖥️ Expected Console Output
+
+```
+Input text: madam
+Is it a Palindrome? : true
+```
+
+---
+
+### ⚙️ How to Compile and Run
+
+**Step 1: Compile**
+
+```bash
+javac UseCase2PalindromeCheckerApp.java
+```
+
+**Step 2: Run**
+
+```bash
+java UseCase2PalindromeCheckerApp
 ```
 
 ---
 
 ## 📈 Future Enhancements
 
-- [ ] Implement palindrome checking logic.
+- [x] Implement palindrome checking logic (UC2).
 - [ ] Add case-insensitive comparison.
 - [ ] Ignore special characters and spaces.
 - [ ] Provide user input support.
@@ -119,8 +214,8 @@ PalindromeCheckerApp/
 
 ## 👨‍💻 Author
 
-Kirti Rani
+Developer
 
 ## 🏷️ Version
 
-1.0
+2.0
