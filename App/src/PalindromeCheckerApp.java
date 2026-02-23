@@ -1,40 +1,40 @@
 /**
  * Description:
- * This class checks whether a hardcoded string is a palindrome.
+ * This class checks whether a string is a palindrome
+ * by reversing it using a loop.
  *
- * UC2: Print a Hardcoded Palindrome Result
+ * UC3: Palindrome Check Using String Reverse
  *
  * @author Developer
- * @version 2.0
+ * @version 3.0
  */
 
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC2.
+     * Application entry point for UC3.
      *
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
 
-        // Hardcoded string
+        // Hardcoded input string
         String input = "madam";
 
-        // Assume it is a palindrome initially
-        boolean isPalindrome = true;
+        // Variable to store reversed string
+        String reversed = "";
 
-        // Loop only till half of the string length
-        for (int i = 0; i < input.length() / 2; i++) {
-
-            // Compare characters from start and end
-            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
-                isPalindrome = false;
-                break; // Exit loop early if mismatch found
-            }
+        // Iterate from last character to first
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
         }
 
-        // Print result
+        // Compare original and reversed string
+        boolean isPalindrome = input.equals(reversed);
+
+        // Display result
         System.out.println("Input text: " + input);
+        System.out.println("Reversed text: " + reversed);
         System.out.println("Is it a Palindrome? : " + isPalindrome);
     }
 }
