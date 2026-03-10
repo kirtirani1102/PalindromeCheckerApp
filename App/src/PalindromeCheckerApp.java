@@ -1,18 +1,38 @@
 /**
- * UC12: Strategy Pattern for Palindrome Algorithms
- * Demonstrates selecting different palindrome strategies at runtime.
+ * UC13: Performance Comparison of Palindrome Algorithms
+ * Compares execution time of different palindrome checking methods
  */
 
 import java.util.*;
 
-interface PalindromeStrategy {
-    boolean checkPalindrome(String input);
-}
+public class PalindromeCheckerApp {
 
-// Stack-based strategy
-class StackStrategy implements PalindromeStrategy {
+    // Method 1: Two-pointer approach
+    public static boolean checkUsingTwoPointer(String input) {
+        int start = 0;
+        int end = input.length() - 1;
 
-    public boolean checkPalindrome(String input) {
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    // Method 2: Reverse string approach
+    public static boolean checkUsingReverse(String input) {
+        String reversed = "";
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed += input.charAt(i);
+        }
+        return input.equals(reversed);
+    }
+
+    // Method 3: Stack approach
+    public static boolean checkUsingStack(String input) {
         Stack<Character> stack = new Stack<>();
 
         for (char c : input.toCharArray()) {
@@ -26,44 +46,40 @@ class StackStrategy implements PalindromeStrategy {
         }
         return true;
     }
-}
-
-// Deque-based strategy
-class DequeStrategy implements PalindromeStrategy {
-
-    public boolean checkPalindrome(String input) {
-        Deque<Character> deque = new ArrayDeque<>();
-
-        for (char c : input.toCharArray()) {
-            deque.addLast(c);
-        }
-
-        while (deque.size() > 1) {
-            if (!deque.removeFirst().equals(deque.removeLast())) {
-                return false;
-            }
-        }
-        return true;
-    }
-}
-
-public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        String input = "racecar";
+        String input = "level";
 
-        // Choose strategy dynamically
-        PalindromeStrategy strategy;
+        // Two Pointer Timing
+        long start1 = System.nanoTime();
+        boolean result1 = checkUsingTwoPointer(input);
+        long end1 = System.nanoTime();
 
-        // Change strategy here
-        strategy = new StackStrategy();
-        // strategy = new DequeStrategy();
+        // Reverse Timing
+        long start2 = System.nanoTime();
+        boolean result2 = checkUsingReverse(input);
+        long end2 = System.nanoTime();
 
-        boolean result = strategy.checkPalindrome(input);
+        // Stack Timing
+        long start3 = System.nanoTime();
+        boolean result3 = checkUsingStack(input);
+        long end3 = System.nanoTime();
 
         System.out.println("Input : " + input);
-        System.out.println("Using Strategy : " + strategy.getClass().getSimpleName());
-        System.out.println("Is Palindrome? : " + result);
+        System.out.println();
+
+        System.out.println("Two Pointer Result : " + result1);
+        System.out.println("Execution Time : " + (end1 - start1) + " ns");
+
+        System.out.println();
+
+        System.out.println("Reverse String Result : " + result2);
+        System.out.println("Execution Time : " + (end2 - start2) + " ns");
+
+        System.out.println();
+
+        System.out.println("Stack Result : " + result3);
+        System.out.println("Execution Time : " + (end3 - start3) + " ns");
     }
 }
