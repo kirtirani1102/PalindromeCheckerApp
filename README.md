@@ -1198,7 +1198,7 @@ java UseCase13PalindromeCheckerApp
 
 ## 👨‍💻 Author
 
-Developer
+Kirti
 
 ## 🏷️ Version
 
