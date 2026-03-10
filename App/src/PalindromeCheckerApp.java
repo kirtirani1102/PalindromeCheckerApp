@@ -1,52 +1,36 @@
-/**
- * Description:
- * This class checks whether a string is a palindrome
- * using both Queue (FIFO) and Stack (LIFO).
- *
- * UC6: Queue + Stack Based Palindrome Check
- *
- * @author Developer
- * @version 6.0
- */
-
-import java.util.Queue;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC6.
+     * Application entry point for UC7.
      *
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
 
-        // Define the input string to validate
-        String input = "civic";
+        // Define the input string
+        String input = "refer";
 
-        // Create a Queue to store characters in FIFO order
-        Queue<Character> queue = new LinkedList<>();
+        // Create a Deque to store characters
+        Deque<Character> deque = new ArrayDeque<>();
 
-        // Create a Stack to store characters in LIFO order
-        Stack<Character> stack = new Stack<>();
-
-        // Insert each character into both queue and stack
+        // Add each character to the deque
         for (char c : input.toCharArray()) {
-            queue.add(c);   // Enqueue
-            stack.push(c);  // Push
+            deque.addLast(c);
         }
 
-        // Flag to track palindrome status
+        // Flag to track palindrome result
         boolean isPalindrome = true;
 
-        // Compare characters until queue becomes empty
-        while (!queue.isEmpty()) {
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
 
-            char fromQueue = queue.remove(); // Dequeue
-            char fromStack = stack.pop();    // Pop
+            char front = deque.removeFirst(); // Remove from front
+            char rear = deque.removeLast();   // Remove from rear
 
-            if (fromQueue != fromStack) {
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
