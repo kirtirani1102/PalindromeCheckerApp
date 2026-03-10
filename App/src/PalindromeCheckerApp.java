@@ -1,19 +1,48 @@
-class PalindromeChecker {
+/**
+ * UC12: Strategy Pattern for Palindrome Algorithms
+ * Demonstrates selecting different palindrome strategies at runtime.
+ */
 
-    // Method to check palindrome
+import java.util.*;
+
+interface PalindromeStrategy {
+    boolean checkPalindrome(String input);
+}
+
+// Stack-based strategy
+class StackStrategy implements PalindromeStrategy {
+
     public boolean checkPalindrome(String input) {
+        Stack<Character> stack = new Stack<>();
 
-        int start = 0;
-        int end = input.length() - 1;
-
-        while (start < end) {
-            if (input.charAt(start) != input.charAt(end)) {
-                return false;
-            }
-            start++;
-            end--;
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
 
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+// Deque-based strategy
+class DequeStrategy implements PalindromeStrategy {
+
+    public boolean checkPalindrome(String input) {
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
+        }
+
+        while (deque.size() > 1) {
+            if (!deque.removeFirst().equals(deque.removeLast())) {
+                return false;
+            }
+        }
         return true;
     }
 }
@@ -22,16 +51,19 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        String input = "madam";
+        String input = "racecar";
 
-        // Create object of PalindromeChecker
-        PalindromeChecker checker = new PalindromeChecker();
+        // Choose strategy dynamically
+        PalindromeStrategy strategy;
 
-        // Call method
-        boolean result = checker.checkPalindrome(input);
+        // Change strategy here
+        strategy = new StackStrategy();
+        // strategy = new DequeStrategy();
 
-        // Print result
+        boolean result = strategy.checkPalindrome(input);
+
         System.out.println("Input : " + input);
+        System.out.println("Using Strategy : " + strategy.getClass().getSimpleName());
         System.out.println("Is Palindrome? : " + result);
     }
 }
